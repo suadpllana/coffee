@@ -3,25 +3,28 @@ import {useEffect, useState} from "react"
 const Coffee = () => {
 
     const [coffeeData , setCoffeeData] = useState([])
-    const [count , setCount] = useState(-1)
+    const [count , setCount] = useState(0)
 
     async function generateImage(){
         const url = "https://api.sampleapis.com/coffee/hot";
         const response = await fetch(url)
         const data = await response.json()
-        setCount(prev => prev + 1)
-        if( count >= data.length - 1 ){
-            setCoffeeData([])
+   
+        console.log(count, data.length)
+        if( count >= data.length - 2){
             alert("We have no more photos :(")
+            setCount(0)
             return
         }
         console.log(data)
         setCoffeeData(data)
-   
+        setCount(prev => prev + 1)
     }
 
     
-      
+      useEffect(()=> {
+        generateImage()
+      } , [])
    
 
 
