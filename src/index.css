@@ -6,11 +6,16 @@ body{
 .container{
     width: 40%;
     background-color: white;
-    border-radius: 50px;
+    border-radius: 20px;
     margin-left: 30%;
     min-height: 7rem;
+   height: auto;
+  
 }
 .container button {
+ 
+
+
     border: none;
     border-radius: 20px;
     width: 110px;
