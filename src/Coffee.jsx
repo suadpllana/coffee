@@ -1,3 +1,9 @@
+
+
+
+
+
+import {jsPDF} from 'jspdf';
 import React from 'react'
 import {useEffect, useState} from "react"
 const Coffee = () => {
@@ -14,7 +20,7 @@ const Coffee = () => {
       const url = `https://api.unsplash.com/search/photos?page=${page}&query=coffee&client_id=${accessKey}`;
       const response = await fetch(url);
       const data = await response.json();
-    console.log(data)
+   
     
     if(count >= data.results.length - 1) {
         setPage(prev => prev + 1)
@@ -25,7 +31,16 @@ const Coffee = () => {
           
             setCount(prev => prev + 1)
     }
+    const downloadPDF = (image) => {
+      if (coffeeData.length > 0) {
+        const doc = new jsPDF();
+     
   
+        // Adding image to PDF
+        doc.addImage(image, 'JPEG', 10, 10, 180, 160);
+        doc.save('coffee-image.pdf'); // Saves the file
+      }
+    };
 
   return (
     <div>
@@ -36,7 +51,7 @@ const Coffee = () => {
                 {coffeeData.length > 0 ?
                 <>
                 <h1>{coffeeData[count].alt_description ? coffeeData[count].alt_description : ""}</h1>
-                    <img src={coffeeData[count].urls.regular ? coffeeData[count].urls.regular : ""} alt={coffeeData[count].alt_description ? coffeeData[count].alt_description : ""} />
+                    <img className="coffeeImage" onClick={() => downloadPDF(coffeeData[count].urls.regular)} src={coffeeData[count].urls.regular ? coffeeData[count].urls.regular : ""} alt={coffeeData[count].alt_description ? coffeeData[count].alt_description : ""} />
                 </>
             :<></>}
           

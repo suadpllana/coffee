@@ -31,6 +31,9 @@ body{
     object-fit: cover;
     border-radius: 20px;
 }
+.coffeeImage{
+    cursor: pointer;
+}
 @media (max-width: 767px){
     .container{
         width: 100%;
